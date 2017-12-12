@@ -101,5 +101,6 @@
     <string name="quick_settings_screenrecord_hq_label">Screenrecord HQ</string>
 
     <string name="status_bar_roaming">Roaming</string>
+    <string name="status_bar_vpn">VPN</string>
 
 </resources>
