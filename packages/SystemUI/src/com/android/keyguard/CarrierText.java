@@ -225,7 +225,7 @@ public class CarrierText extends TextView {
                     isImsRegistered = false;
                 }
                 if (isImsRegistered) {
-                    carrierTextForSimState = carrierTextForSimState + " - VoLTE";
+                    carrierTextForSimState = carrierTextForSimState + " VoLTE";
                 }
                 allSimsMissing = false;
                 displayText = concatenate(displayText, carrierTextForSimState);
