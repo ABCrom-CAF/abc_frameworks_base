@@ -74,4 +74,8 @@
     <string name="navMediaArrowsExcludeList" translatable="false">
         chrome,youtube,netflix,firefox,dolphin,opera
     </string>
+
+    <!-- Battery saver tile -->
+    <string name="battery_saver_qs_tile_fully_charged">Fully Charged</string>
+
 </resources>
