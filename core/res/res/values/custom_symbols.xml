@@ -51,4 +51,6 @@
   <java-symbol type="anim" name="recent_screen_fade_out" />
   <java-symbol type="anim" name="recent_enter" />
 
+  <java-symbol type="integer" name="config_flashlightProximityTimeout" />
+
 </resources>
