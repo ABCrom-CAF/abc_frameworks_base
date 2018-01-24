@@ -66,6 +66,7 @@ public class SignalClusterView extends LinearLayout implements NetworkController
     private static final String SLOT_WIFI = "wifi";
     private static final String SLOT_ETHERNET = "ethernet";
     private static final String SLOT_VPN = "vpn";
+    private static final String SLOT_ROAMING = "roaming";
 
     private final NetworkController mNetworkController;
     private final SecurityController mSecurityController;
@@ -121,7 +122,7 @@ public class SignalClusterView extends LinearLayout implements NetworkController
     private boolean mWifiActivityEnabled;
     private boolean mForceBlockWifi;
     private boolean mReadIconsFromXML;
-
+    private boolean mBlockRoaming;
 
     private final IconLogger mIconLogger = Dependency.get(IconLogger.class);
 
@@ -176,13 +177,15 @@ public class SignalClusterView extends LinearLayout implements NetworkController
         boolean blockMobile = blockList.contains(SLOT_MOBILE);
         boolean blockWifi = blockList.contains(SLOT_WIFI);
         boolean blockEthernet = blockList.contains(SLOT_ETHERNET);
+        boolean blockRoaming = blockList.contains(SLOT_ROAMING);
 
         if (blockAirplane != mBlockAirplane || blockMobile != mBlockMobile
-                || blockEthernet != mBlockEthernet || blockWifi != mBlockWifi) {
+                || blockEthernet != mBlockEthernet || blockWifi != mBlockWifi || blockRoaming != mBlockRoaming) {
             mBlockAirplane = blockAirplane;
             mBlockMobile = blockMobile;
             mBlockEthernet = blockEthernet;
             mBlockWifi = blockWifi || mForceBlockWifi;
+            mBlockRoaming = blockRoaming;
             // Re-register to get new callbacks.
             mNetworkController.removeCallback(this);
             mNetworkController.addCallback(this);
@@ -776,7 +779,7 @@ public class SignalClusterView extends LinearLayout implements NetworkController
                         (mMobileVisible ? "VISIBLE" : "GONE"), mMobileStrengthId, mMobileTypeId));
 
             mMobileType.setVisibility(mMobileTypeId != 0 ? View.VISIBLE : View.GONE);
-            mMobileRoaming.setVisibility((mRoaming && !mReadIconsFromXML)? View.VISIBLE : View.GONE);
+            mMobileRoaming.setVisibility((mRoaming && !mBlockRoaming && !mReadIconsFromXML)? View.VISIBLE : View.GONE);
             mMobileActivityIn.setVisibility(mActivityIn ? View.VISIBLE : View.GONE);
             mMobileActivityOut.setVisibility(mActivityOut ? View.VISIBLE : View.GONE);
             mDataActivity.setVisibility(mDataActivityId != 0 ? View.VISIBLE : View.GONE);
